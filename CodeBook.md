@@ -10,7 +10,9 @@ of each quantity. Many of the time-domain signals were transformed by the Fast F
 computed on the results in the frequency domain; here too we consider only the means and standard deviations.
 
 The first table produced by the script is `goodtbl`. The first two columns indicate the observation, by activity
-and subject. 
+and subject.  The second table is `avgtbl`, which the script writes to
+`tidytable.txt`. The column descriptions for the two tables are identical, with the implicit understanding that
+`goodtbl` contains individual measurements, while `avgtbl` is averaged by activity and subject.  
 
 Activity is a string with one of these values: WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, or LAYING.
 

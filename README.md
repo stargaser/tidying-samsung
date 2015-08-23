@@ -9,14 +9,11 @@ performing six activities: WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTIN
 Data from the phone's accelerometers and gyroscope were recorded at 50 Hz to yield
 3-axial linear acceleration and 3-axial angular velocity.
 
-The attribution for this dataset is:
+The requsted citation for this dataset is:
 
-Jorge L. Reyes-Ortiz(1,2), Davide Anguita(1), Alessandro Ghio(1), Luca Oneto(1) and Xavier Parra(2)
-  1. Smartlab - Non-Linear Complex Systems Laboratory 
-  DITEN - Università degli Studi di Genova, Genoa (I-16145), Italy. 
-  2. CETpD - Technical Research Centre for Dependency Care and Autonomous Living
-  Universitat Politècnica de Catalunya (BarcelonaTech). Vilanova i la Geltrú (08800), Spain
-   activityrecognition@smartlab.ws
+Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz. A Public Domain Dataset for Human Activity Recognition Using Smartphones.
+21th European Symposium on Artificial Neural Networks, Computational Intelligence and Machine Learning, ESANN 2013. 
+Bruges, Belgium 24-26 April 2013.
 
 The actual dataset files were not taken from the UCI site, but were provided by the
 "Getting and Cleaning Data" course 
@@ -46,6 +43,8 @@ retaining the activity and subject labels
 7. Sort `goodtbl` by activity and then subject.
 8. For all the measurement means and standard deviations, compute the mean by activity and subject, and
 place the result in `avgtbl`. Write `avgtbl` to a file `tidytable.txt`.
+
+Note, the file `tidytable.txt` may be read back into R with `read.table("tidytable.txt",header=TRUE)`.
 
 ## Code book
 

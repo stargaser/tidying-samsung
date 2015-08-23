@@ -55,8 +55,19 @@ library(dplyr)
 # Get the column names with "mean" or "std", excluding "angle"
 
 meantbl <- select(datatbl, contains("mean.."))
+meantbl <- meantbl[, grep("^angle", colnames(meantbl), invert=TRUE), with=FALSE]
 stdtbl <- select(datatbl, contains("std.."))
+stdtbl <- stdtbl[, grep("^angle", colnames(stdtbl), invert=TRUE), with=FALSE]
 firsttbl <- select(datatbl, one_of(c("activity", "subject")))
+
+# Let's fix up the names of meantbl and stdtbl
+mnames <- names(meantbl)
+newmnames <- gsub(".mean..","Mean", mnames)
+setnames(meantbl, mnames, newmnames)
+snames <- names(stdtbl)
+newsnames <- gsub(".std..","Std", snames)
+setnames(stdtbl, snames, newsnames)
+
 goodtbl <- cbind(firsttbl,meantbl,stdtbl)
                                    
 # Substitute activity strings for numbers
@@ -64,10 +75,15 @@ goodtbl$activity <- plyr::mapvalues(goodtbl$activity,
                      from = activities$V1,
                      to = activities$V2)
 
+# arrange the column names into alphabetical order
+finalnames <- c("activity", "subject", sort(c(newmnames, newsnames)))
+goodtbl <- select(goodtbl, one_of(finalnames))
+goodtbl <- arrange(goodtbl, activity, subject)
 # See http://stackoverflow.com/questions/21295936/can-dplyr-summarise-over-several-variables-without-listing-each-one
 avgtbl <- goodtbl %>% 
     group_by(activity, subject) %>% 
-    summarise_each(funs(mean))
+    summarise_each(funs(mean)) %>%
+    arrange(activity, subject)
 
 write.table(avgtbl, file = "tidytable.txt", row.names = FALSE)
 
